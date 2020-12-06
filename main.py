@@ -90,10 +90,11 @@ print(sample_dataset)
 
 # Zadanie 4
 # A teraz nauczę się czym jest silhouette coeficiency, jest 4:36 i  padam na twarz :P
+# edit: poniższe zadanie zostało zrealizowane tylko dla algorytmów, które zakładają zadeklarowanie ilości
+# docelowych klastrów
 sample_dataset = source_dataset.copy()
 vis_dataset = pandas.DataFrame(pca_2d.fit_transform(sample_dataset))
 for n_clusters in range(2, 8):
-    # Create a subplot with 1 row and 2 columns
     fig, (ax1, ax2) = plt.subplots(1, 2)
     fig.set_size_inches(18, 7)
 
@@ -106,7 +107,6 @@ for n_clusters in range(2, 8):
     print("For n_clusters =", n_clusters,
           "The average silhouette_score is :", silhouette_avg)
 
-    # Compute the silhouette scores for each sample
     sample_silhouette_values = silhouette_samples(vis_dataset, cluster_labels)
 
     y_lower = 10
@@ -130,7 +130,7 @@ for n_clusters in range(2, 8):
     ax1.set_yticks([])
     ax1.set_xticks([-0.1, 0, 0.2, 0.4, 0.6, 0.8, 1])
 
-    # 2nd Plot showing the actual clusters formed
+    # wizualizacja rozkladu klastrów
     colors = matplotlib.cm.nipy_spectral(cluster_labels.astype(float) / n_clusters)
     ax2.scatter(vis_dataset[0], vis_dataset[1], marker='.', s=30, lw=0, alpha=0.7,
                 c=colors, edgecolor='k')
